@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Log in</title>
+        <link rel="stylesheet" href="login.css"/>
+    </head>
+    <body>
+        <h1>Login</h1>
+        <p>please login to continue</p>
+        <form method="post" action="/login">
+            <fieldset>
+                <label for="username">Enter Your Username: <input id="username" name="username" type="text" required /></label>
+                <label for="password">Enter Your Password: <input id="password" name="password" type="password" required/></label>
+                <a href="/password_forgotten"> forgot your password again dumbass ?</a>
+            </fieldset>
+            <p id="errorMessage" style="color: red;"></p>
+            <button type="Submit">login</button>
+        </form>
+        <form method="get" action="/register">
+            <button id="create new account" type="submit">create new account</button> 
+        </form>
+        <p id="paragraph"></p>
+        <script src="/script.js"></script>
+    </body>
+</html>
