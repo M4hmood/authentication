@@ -9,19 +9,19 @@
     <body>
         <h1>Login</h1>
         <p>please login to continue</p>
-        <form method="post" action="/login">
+        <form id="loginForm" method="post" action="/login">
             <fieldset>
                 <label for="username">Enter Your Username: <input id="username" name="username" type="text" required /></label>
                 <label for="password">Enter Your Password: <input id="password" name="password" type="password" required/></label>
-                <a href="/password_forgotten"> forgot your password again dumbass ?</a>
+                <a href="/password_forgotten"> forgot your password ?</a>
             </fieldset>
-            <p id="errorMessage" style="color: red;"></p>
+            <p id="resultMessage"></p>
             <button type="Submit">login</button>
         </form>
         <form method="get" action="/register">
-            <button id="create new account" type="submit">create new account</button> 
+            <button id="create new account" type="submit" href="/register">create new account</button> 
         </form>
-        <p id="paragraph"></p>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="/script.js"></script>
     </body>
 </html>

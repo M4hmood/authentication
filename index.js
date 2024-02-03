@@ -3,7 +3,7 @@ const app = express();
 require('dotenv').config();
 const mongoose = require('mongoose');
 
-app.use(express.urlencoded({ extended: false})); //app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true})); //app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public')); //Serve static files from the "public" directory
 
 mongoose.connect(process.env.MONGO_URI, {
@@ -71,14 +71,13 @@ app.post('/login', async (req, res) => {
                 res.send("you've successfuly logged in");
             } else {
                 res.send("password incorrect");
-                //document.getElementById("status").textContent = "password incorrect";
+                //res.json({ message: "password incorrect" });
             }
         } else {
             res.send("User not found, you may have to create an account");
-            //document.getElementById("status").textContent = "User not found, you may have to create an account";
         }
     } catch (error) {
-        res.status(201).json({ error: 'an error has occured when logging in' });
+        res.status(500).json({ error: 'an error has occured when logging in' });
     }
 });
 
@@ -89,12 +88,12 @@ app.post('/register', async (req, res) => {
         if (isExtisting) {
             return res.send('user already exists');
         }
-        //const savedUser = await User.create({firstName, lastName, username, email, password, birthdate, gender, bio})
         const newUser = new User({firstName, lastName, username, email, password, birthdate, gender, bio});
         const savedUser = await newUser.save();
+        //const savedUser = await User.create({firstName, lastName, username, email, password, birthdate, gender, bio})
         res.json({ message: 'User registered successfully!', user: savedUser });
     } catch (error) {
-        res.status(202).json({ error: 'an error has occured when signing up' })
+        res.status(501).json({ error: 'an error has occured when signing up' })
     }
 });
 
