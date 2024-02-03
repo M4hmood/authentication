@@ -17,11 +17,3 @@ $(document).ready(function () {
         });
     });
 });
-
-/*
-$(document).ready( function() {
-    $('#loginForm').submit( function (event) {
-        event.preventDefault();
-        $('#errorMessage').text('hello there');
-    })
-});*/
