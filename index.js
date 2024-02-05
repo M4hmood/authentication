@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const mongoose = require('mongoose');
 
@@ -58,13 +59,13 @@ app.get('/users', async (req, res) => {
             res.json(users);
         }
     } catch (error) {
-        res.status(103).send({ error: "can't load users"});
+        res.status(400).send({ error: "can't load users"});
     }
 });
 
 app.post('/login', async (req, res) => {
     try {
-        const {username, password} = req.body;
+        const { username, password } = req.body;
         const user = await User.findOne({ username });
         if (user) {
             if (user.password == password) {

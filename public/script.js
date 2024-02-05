@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     $('#loginForm').submit(function (event) {
         // Prevent the default form submission

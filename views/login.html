@@ -9,13 +9,13 @@
     <body>
         <h1>Login</h1>
         <p>please login to continue</p>
-        <form id="loginForm" method="post" action="/login">
+        <form id="loginForm"> <!-- method="post" action="/login"-->
             <fieldset>
                 <label for="username">Enter Your Username: <input id="username" name="username" type="text" required /></label>
                 <label for="password">Enter Your Password: <input id="password" name="password" type="password" required/></label>
-                <a href="/password_forgotten"> forgot your password ?</a>
+                <a href="/password_forgotten" > forgot your password ?</a>
+                <p id="resultMessage"></p>
             </fieldset>
-            <p id="resultMessage"></p>
             <button type="Submit">login</button>
         </form>
         <form method="get" action="/register">
