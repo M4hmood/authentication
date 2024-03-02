@@ -2,9 +2,9 @@ body {
   width: 100%;
   height: 100vh;
   margin: 0;
-  background-color: #1b1b32;
+  background-color: #314040;
   color: #f5f6f7;
-  font-family: Tahoma;
+  font-family: Papyrus;
   font-size: 16px;
 }
 
@@ -35,8 +35,9 @@ input, button {
   margin: 10px 0 10px 0;
   width: 100%;
   min-height: 2em;
-  background-color: #0a0a23;
+  background-color: #062d2f;
   border: 1px solid #0a0a23;
+  border-radius: 5px;
   color: #ffffff;
 }
 
@@ -51,14 +52,15 @@ button {
   width: 60%;
   margin: 1em auto;
   height: 2em;
+  font-family: Papyrus;
   font-size: 1.1rem;
-  background-color: #3b3b4f;
+  background-color: #3c8691;
   border-color: white;
   min-width: 300px;
 }
 
 button[id="create new account"] {
-  background-color: #098deb;
+  background-color: #6d6d6d;
 }
 
 .inline{
@@ -66,7 +68,7 @@ button[id="create new account"] {
 }
 
 a {
-  color: #098deb;
+  color: #3c8691;
   margin-left: 65%;
 }
 

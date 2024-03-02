@@ -2,26 +2,49 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Log in</title>
         <link rel="stylesheet" href="login.css"/>
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>-->
     </head>
     <body>
         <h1>Login</h1>
         <p>please login to continue</p>
-        <form id="loginForm"> <!-- method="post" action="/login"-->
+        <form id="loginForm">
             <fieldset>
                 <label for="username">Enter Your Username: <input id="username" name="username" type="text" required /></label>
                 <label for="password">Enter Your Password: <input id="password" name="password" type="password" required/></label>
                 <a href="/password_forgotten" > forgot your password ?</a>
-                <p id="resultMessage"></p>
+                <p id="errorMessage"></p> 
             </fieldset>
             <button type="Submit">login</button>
         </form>
         <form method="get" action="/register">
-            <button id="create new account" type="submit" href="/register">create new account</button> 
+            <button id="create new account" type="submit">create new account</button> 
         </form>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script src="/script.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#loginForm').submit(function (event) {
+                    // Prevent the default form submission
+                    event.preventDefault();
+                    // Get the entered password
+                    const username = $('#username').val();
+                    const password = $('#password').val();
+                    // Send an AJAX request to the server to verify the password
+                    $.post('/auth/login', { username: username, password: password }, function (data) {
+                        // Display the result message
+                        if ((data.message == "password incorrect") || (data.message == "User not found, you may have to create an account")) {
+                            return $('#errorMessage').text(data.message).css("color", "red");
+                        } else {
+                            localStorage.setItem('token', data.token);
+                            window.location.href = data.redirectURL; 
+                            //$('body').html(data.token);
+                        }
+                    }, 'json');
+                });
+            });
+        </script> 
     </body>
 </html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="profile.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <h1>Welcome, <span id="username">Loading...</span>!</h1>
+    <p>this is your profile, your data will be shown here soon</p>
+    <script>
+        $(document).ready(function() {
+            // Get the current URL
+            const currentUrl = window.location.href;
+            // Extract the user ID from the URL using a regular expression
+            const userIdMatch = currentUrl.match(/\/profile\/([^/]+)$/);
+            // Check if a match is found
+            if (userIdMatch && userIdMatch[1]) {
+                const userId = userIdMatch[1];
+                // Get the token from localStorage to send it in the request headers for authorization
+                const token = localStorage.getItem('token');
+                // Fetch user data using the user ID from the URL
+                $.ajax({
+                    url: `/api/user/${userId}`,
+                    method: 'GET',
+                    headers: {
+                        Authorization: `hedwig ${token}`
+                    },
+                    success: function(data) {
+                        $('#username').text(data.username);
+                    },
+                    error: function(error) {
+                        // Update the message to indicate an error
+                        $('#username').text('Error loading data');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

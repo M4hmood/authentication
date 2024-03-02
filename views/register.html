@@ -9,14 +9,14 @@
     <body>
         <h1>Registration Form</h1>
         <p>Please fill out this form with the required information to proceed</p>
-        <form method="post" action="/register">
-            
+        <form id="registerForm">
             <label for="first-name">Enter Your First Name: <input id="first-name" name="firstName" type="text" required /></label>
             <label for="last-name">Enter Your Last Name: <input id="last-name" name="lastName" type="text" required /></label>
             <label for="username">Enter Your Username: <input id="username" name="username" type="text" required /></label>
             <label for="email">Enter Your Email: <input id="email" name="email" type="email" required /></label>
             <label for="new-password">Create a New Password: <input id="new-password" name="password" type="password" pattern="[a-z0-5]{8,}" required /></label>
             <label for="confirmed-password">Confirm your Password: <input id="confirmed-password" name="c-password" type="password" pattern="[a-z0-5]{8,}" required /></label>
+            <p id="pwdMatch"></p>
             <label for="birthdate">Enter Your Birthdate: <input id="birthdate" name="birthdate" type="date" required /></label>
             <legend>Enter Your Gender: </legend>
             <div class="gender">
@@ -24,10 +24,42 @@
                 <label for="female"><input id="female" name="gender" type="radio" class="inline" value="female" /> Female</label>
                 <label for="other"><input id="other" name="gender" type="radio" class="inline" value="other" /> Other</label>
             </div>
-            <label for="bio">Provide a bio:
+            <label for="bio">tell us about your intention in joining our society :
             <textarea id="bio" name="bio" rows="3" cols="30" placeholder="I like coding on the beach..."></textarea>
             </label>
+            <p id="errorMessage"></p>
             <button type="submit">Create account</button>
         </form>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#registerForm').submit(function (event) {
+                    // Prevent the default form submission
+                    event.preventDefault();
+                    // Get the entered password
+                    const firstName = $('#first-name').val();
+                    const lastName = $('#last-name').val();
+                    const email = $('#email').val();
+                    const username = $('#username').val();
+                    const newPassword = $('#new-password').val();
+                    const confirmedPassword = $('#confirmed-password').val();
+                    const birthdate = $('#birthdate').val();
+                    const gender = $('#gender').val();
+                    const bio = $('#bio').val();
+
+                    if (newPassword != confirmedPassword) $('#pwdMatch').text("passwords aren't the same").css("color", "red");
+                    // Send an AJAX request to the server to verify the password
+                    $.post('/auth/register', { firstName, lastName, email, password: newPassword, birthdate, gender, bio }, function (data) {
+                        // Display the result message
+                        if ((data == 'username already exists') || (data == 'email already signed up to another account')) {
+                            $('#errorMessage').text(data).css("color", "red");
+                        } else {
+                            $('body').html(data.message);
+                            //$('#resultMessage').text(data).css("color", "green");
+                        }
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

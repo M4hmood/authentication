@@ -1,4 +1,4 @@
-GET http://localhost:3000/
+GET http://localhost:3000/home
 
 ###
 
@@ -10,8 +10,40 @@ GET http://localhost:3000/register
 
 ###
 
-POST http://localhost:3000/login
+GET http://localhost:3000/protected
+Authorization: 
 
 ###
 
-POST http://localhost:3000/register
+GET http://localhost:3000/profile/65ce216f55f729df782d7e24
+
+###
+
+GET http://localhost:3000/api/user/65ce216f55f729df782d7e24
+Authorization: hedwig eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1Y2UyMTZmNTVmNzI5ZGY3ODJkN2UyNCIsImZpcnN0TmFtZSI6Ik1haG1vdWQgWWFzc2luZSIsImxhc3ROYW1lIjoiQm91bWFpemEiLCJ1c2VybmFtZSI6Ik00aG1vdWQiLCJlbWFpbCI6ImJvdW1haXphLnlhc3NpbjAzQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJGxkaktJM2FDelk5YUhYUVIwdEltOXU2c1lZZjhYUHpyS3FtOGJDZ1dRLndqLkpWc1R4TERLIiwiYmlydGhkYXRlIjoiMjAwMy0xMS0xOFQyMzowMDowMC4wMDBaIiwiZ2VuZGVyIjoibWFsZSIsImJpbyI6IndoYXRldmVyIiwiX192IjowfSwiaWF0IjoxNzA5Mjk5MDc1LCJleHAiOjE3MDkzMDI2NzV9.2LTvC0jyS2nml9k3AkxDirhrB9cXJ7tIjwZ8dd-CYOA
+###
+
+POST http://localhost:3000/auth/login
+content-type: application/json
+
+{ 
+    "username": "M4hmoud",
+    "password": "boumaiza03"
+
+}
+
+###
+
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "firstName": "Mahmoud Yassine",
+    "lastName": "Boumaiza",
+    "username": "M4hmoud",
+    "email": "boumaiza.yassin03@gmail.com",
+    "password": "boumaiza03",
+    "birthdate": "11-19-2003",
+    "gender": "male",
+    "bio": "whatever"
+}
